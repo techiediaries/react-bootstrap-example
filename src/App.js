@@ -1,47 +1,84 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import {
+  Container, Row, Col, Navbar, NavbarBrand, Nav, NavItem, NavLink, Card, CardBody, CardTitle, CardSubtitle, CardText, Button
+} from 'reactstrap';
+
+
 
 
 class App extends Component {
   state = {
-    todos: []
+    contacts: []
   }
   componentDidMount() {
-    fetch('http://jsonplaceholder.typicode.com/todos')
+    fetch('http://jsonplaceholder.typicode.com/users')
     .then(res => res.json())
     .then((data) => {
-      this.setState({ todos: data })
-      console.log(this.state.todos)
+      this.setState({ contacts: data })
+      console.log(this.state.contacts)
     })
     .catch(console.log)
   }
   render() {
     
     return (
-       <div className="container">
-        <div className="col-xs-12">
-        <h1>My Todos</h1>
-        {this.state.todos.map((todo) => (
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">{todo.title}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">
-              { todo.completed &&
-                <span>
-                Completed
-                </span>
-              }
-              { !todo.completed &&
-                <span>
-                  Pending
-                </span>
-              }              
-              </h6>
-            </div>
-          </div>
+      <Fragment>
+        <Navbar color="faded" light expand="md">
 
-        ))}
-        </div>
-       </div>
+          <NavbarBrand href="/">
+            React Bootstrap Example
+          </NavbarBrand>
+          <Nav className="ml-auto" navbar>
+
+            <NavItem className="d-flex align-items-center">
+              <NavLink className="font-weight-bold" href="/">Home</NavLink>
+            </NavItem>
+            <NavItem className="d-flex align-items-center">
+              <NavLink className="font-weight-bold" href="https://www.techiediaries.com/react-bootstrap">
+                Tutorial
+              </NavLink>
+            </NavItem>
+
+
+          </Nav>
+        </Navbar>
+
+        <Container fluid>
+
+
+          <Row>
+            <Col>
+              {this.state.contacts.map((contact) => (
+
+                <Card color="primary">
+                  <CardBody>
+                    <CardTitle className="h3 mb-2 pt-2 font-weight-bold">{contact.name}</CardTitle>
+                    <CardSubtitle className="mb-3 font-weight-light text-uppercase" style={{ fontSize: '0.8rem' }}>{contact.email}</CardSubtitle>
+                    <CardText className="mb-4" style={{ fontSize: '0.75rem' }}> {contact.company.catchPhrase}</CardText>
+                    <Row>
+
+                    <Col xs={{ size: 'auto' }}>
+                          <Button color="success">Call</Button>
+                    </Col>
+                    <Col sm={'auto'}>
+                          <Button color="warning">Message</Button>
+                    </Col>
+                    <Col sm={'auto'}>
+                          <Button color="success">Email</Button>
+                    </Col>
+                    </Row>
+                  </CardBody>
+                </Card>
+
+
+
+              ))}
+            </Col>
+          </Row>
+
+        </Container>
+      </Fragment>
     );
   }
 }
