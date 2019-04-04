@@ -1,3 +1,8 @@
+# React Bootstrap 4 Example
+
+In this [tutorial](https://www.techiediaries.com/react-bootstrap) we'll learn how to integrate Bootstrap 4 with React by building a simple example React application and style the UI with common Bootstrap components such as the grid system (container, row and col classes), navigation bars and cards.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
